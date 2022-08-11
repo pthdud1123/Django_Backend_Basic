@@ -15,9 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('',include('single_pages.urls')),
     path('blog/', include('blog.urls')),
     path('admin/', admin.site.urls),
 ]
+
+urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT) #정적인 url을 만드는 함수를 불러와서 static을 통해 MEDIA URL과 MEDIA ROOT(경로)생성/ 반환값이 리스트이다.
