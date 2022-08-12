@@ -43,6 +43,7 @@
                 <header class="mb-4">
                     <!-- Post title-->
                     <h1 class="fw-bolder mb-1">{{post.title}}</h1>
+                    <h5 class="text-muted">{{post.hook_text}}</h5>
                     <!-- Post meta content-->
                     <div class="text-muted fst-italic mb-2">{{post.created_at}} by 작성자(예정)</div>
                     <!-- Post categories-->
@@ -68,7 +69,7 @@
 
                         {% if post.get_file_ext == 'csv'%}
                         <i class="fa-solid fa-file-csv"></i>
-                        {% elif post.get_file_ext == 'xlsx' or post.get_file_ext== 'xls'%}
+                        {% elif post.get_file_ext == 'xlsx' or post.get_file_ext == 'xls'%}
                         <i class="fa-solid fa-file-excel"></i>
                         {% elif post.get_file_ext == 'docx' or post.get_file_ext == 'doc'%}
                         <i class="fa-solid fa-file-word"></i>
@@ -76,8 +77,6 @@
                         <i class="far fa-file"></i>
                         {%endif%}
                         {{post.get_file_name}}
-
-
 
                     </a>
                     {% endif %}
