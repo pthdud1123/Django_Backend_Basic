@@ -35,9 +35,9 @@ class TestView(TestCase):
         response=self.client.get('/blog/')
         soup=BeautifulSoup(response.content,'html.parser')
         self.assertEqual(response.status_code,200)
-        main_area=soup.find('div',id='mean-area')
+        main_area=soup.find('div',id = 'main-area')
         self.assertIn(post_001.title, main_area.text)
-        self.assertIn(post_002,main_area.text)
+        self.assertIn(post_002.title, main_area.text)
         self.assertNotIn("아직 게시물이 없습니다.",main_area.text)
 
 

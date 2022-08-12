@@ -89,10 +89,11 @@
     </div>
 </div>
 
-<div class="container my-3">
+<div class="container my-3" id="main-area">
     <div class="row">
         <div class="col-md-8 col-lg-9">
             <h1>Blog</h1>
+            {% if post_list.exists %}
             {% for p in post_list%}
             <div class="card mb-4">
                 <a href="{{p.title}}">
@@ -117,6 +118,9 @@
                 </div>
             </div>
             {% endfor %}
+            {% else %}
+            <h3>아직 게시물이 없습니다.</h3>
+            {% endif %}
         </div>
         <div class="col-md-4 col-lg-3">
             <h3>Search</h3>
