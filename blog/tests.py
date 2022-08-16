@@ -88,7 +88,7 @@ class TestView(TestCase):
         self.assertIn(self.post_002.category.name, post_002_card.text)
 
         post_003_card = main_area.find('div', id="post-3")
-        self.assertIn("미분류", post_001_card.text)
+        self.assertIn("미분류", post_003_card.text)
         self.assertIn(self.post_003.title, post_003_card.text)
 
         self.assertIn(self.user_trump.username.upper(),main_area.text)
@@ -107,6 +107,23 @@ class TestView(TestCase):
         # self.assertIn(post_001.title, main_area.text)
         # self.assertIn(post_002.title, main_area.text)
 
+    def test_post_detail(self):
+        self.assertEqual(self.post_001.get_absolute_url(),'/blog/1/')
+
+        response=self.client.get(self.post_001.get_absolute_url())
+        self.assertEqual(response.status_code,200)
+        soup=BeautifulSoup(response.content,"html.parser")
+        self.navar_test(soup)
+
+        self.assertIn(self.post_001.title,soup.title.text)
+
+        main_area=soup.find('div', id="main-area")
+        post_area=main_area.find('div', id="post-area")
+        self.assertIn(self.post_001.title, post_area.text)
+        self.assertIn(self.category_programming.name, post_area.text)
+
+        self.assertIn(self.post_001.content,post_area.text)
+        self.assertIn(self.user_trump.username.upper(),post_area.text)
 
 
 

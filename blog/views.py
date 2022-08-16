@@ -7,7 +7,7 @@ class PostList(ListView):
     ordering='-pk'
 
     def get_context_data(self,**kwargs): #*이 두개이면 딕셔너리형태로 받는다.
-        context=super(PostList,self).get_context_data()
+        context=super(PostList, self).get_context_data()
         context['categories']=Category.objects.all()
         context['no_category_post_count']=Post.objects.filter(category=None).count()
 
@@ -15,6 +15,13 @@ class PostList(ListView):
 
 class PostDetail(DetailView):
     model=Post
+
+    def get_context_data(self,**kwargs): #*이 두개이면 딕셔너리형태로 받는다.
+        context=super(PostDetail, self).get_context_data()
+        context['categories']=Category.objects.all()
+        context['no_category_post_count']=Post.objects.filter(category=None).count()
+
+        return context
 
 
 # def index(request):
