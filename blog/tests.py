@@ -7,6 +7,23 @@ class TestView(TestCase):
 
     def setUp(self):
         self.client=Client()
+
+    def navar_test(self,soup):
+        navbar = soup.nav
+        self.assertIn("Blog", navbar.text)
+        self.assertIn("About me", navbar.text)
+
+        log_btn=navbar.find('a',text="MINI_0u0")
+        self.assertEqual(log_btn.attrs['href'] , '/')
+
+        home_btn=navbar.find('a',text='Home')
+        self.assertEqual(home_btn.attrs['href'] , '/')
+
+        blog_btn=navbar.find('a',text='Blog')
+        self.assertEqual(blog_btn.attrs['href'] , '/blog/')
+
+        about_me_btn=navbar.find('a',text='About me')
+        self.assertEqual(about_me_btn.attrs['href'] , '/about_me/')
     
     def test_post_list(self):
         #두개의 정보가 동일한지 확인
@@ -14,9 +31,8 @@ class TestView(TestCase):
         self.assertEqual(response.status_code,200)
         soup=BeautifulSoup(response.content,'html.parser')
         self.assertEqual(soup.title.text, 'Blog')
-        navbar=soup.nav
-        self.assertIn('Blog',navbar.text)
-        self.assertIn('About me',navbar.text)
+
+        self.navar_test(soup)
 
         self.assertEqual(Post.objects.count(),0)
         main_area=soup.find('div',id='main-area')
@@ -66,21 +82,6 @@ class TestView(TestCase):
 
         self.assertIn(post_001.content , post_area.text)
 
-    def navar_test(self,soup):
-        navbar = soup.nav
-        self.assertIn("Blog", navbar.text)
-        self.assertIn("About me", navbar.text)
 
-        log_btn=navbar.find('a',text="mini_0u0")
-        self.assertEqual(log_btn.attrs['href'],'/')
-
-        home_btn=navbar.find('a',text='Home')
-        self.assertEqual(home_btn.attrs['href'],'/')
-
-        blog_btn=navbar.find('a',text='Blog')
-        self.assertEqual(home_btn.attrs['href'],'/blog/')
-
-        about_me_btn=navbar.find('a',text='About me')
-        self.assertEqual(home_btn.attrs['href'],'/about_me/')
 
         
