@@ -12,83 +12,8 @@
     <script src="https://kit.fontawesome.com/37d2af89bc.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light ">
-    <div class="container" >
-        <a class="navbar-brand" href="./index.html">MINI_0u0</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./blog_list.html">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./about_me.html">About me</a>
-                </li>
-                <li class="nav-item">
-                    <!-- <a class="nav-link disabled">Disabled</a> -->
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Link
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li></ul>
-                </li>
-            </ul>
-            <!--로그인-->
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Log In</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<!-- Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="logInModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="loginModalLabel">
-                    <i class="fa-solid fa-right-to-bracket"></i>
-                    log In</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-6 col-sm-12 d-grid gap-2">
-                        <button type="button" class="btn btn-outline-dark btn-sm gap-2">
-                            <i class="fa-brands fa-google"></i>
-                            Login in with google
-                        </button>
-                        <button type="button" class="btn btn-outline-dark btn-sm">
-                            <i class="fa-regular fa-envelope"></i>
-                            Login in with E-mail
-                        </button>
-                    </div>
-                    <div class="col-md-6 col-sm-12 d-grid gap-2">
-                        <button type="button" class="btn btn-outline-dark">
-                            <i class="fa-solid fa-user"></i>
-                            Sign Up with E-mail
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-            </div>
-        </div>
-    </div>
-</div>
-
+<!--#blog.html을 저장할거에요-->
+{% include 'blog/navbar.html'%}
 <div class="container my-3" id="main-area">
     <div class="row">
         <div class="col-md-8 col-lg-9">
@@ -154,10 +79,7 @@
     </div>
 
 </div>
-<!-- Footer-->
-<footer class="py-5 bg-dark">
-    <div class="container"><p class="m-0 text-center text-white">mini_0u0 2022</p></div>
-</footer>
+{% include 'blog/footer.html'%}
 
 
 

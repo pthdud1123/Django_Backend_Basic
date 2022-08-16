@@ -52,11 +52,13 @@ class TestView(TestCase):
         self.assertEqual(response.status_code, 200)
         soup = BeautifulSoup(response.content,'html.parser')
 
-        navbar=soup.nav
-        self.assertIn("Blog", navbar.text)
-        self.assertIn("About me", navbar.text)
+        # navbar=soup.nav
+        # self.assertIn("Blog", navbar.text)
+        # self.assertIn("About me", navbar.text)
 
         self.assertIn(post_001.title , soup.title.text)
+
+        self.navar_test(soup)
 
         main_area=soup.find('div', id="main-area")
         post_area=main_area.find('div', id="post-area")
@@ -64,5 +66,21 @@ class TestView(TestCase):
 
         self.assertIn(post_001.content , post_area.text)
 
+    def navar_test(self,soup):
+        navbar = soup.nav
+        self.assertIn("Blog", navbar.text)
+        self.assertIn("About me", navbar.text)
+
+        log_btn=navbar.find('a',text="mini_0u0")
+        self.assertEqual(log_btn.attrs['href'],'/')
+
+        home_btn=navbar.find('a',text='Home')
+        self.assertEqual(home_btn.attrs['href'],'/')
+
+        blog_btn=navbar.find('a',text='Blog')
+        self.assertEqual(home_btn.attrs['href'],'/blog/')
+
+        about_me_btn=navbar.find('a',text='About me')
+        self.assertEqual(home_btn.attrs['href'],'/about_me/')
 
         
