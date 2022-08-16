@@ -2,11 +2,14 @@ from django.test import TestCase
 from django.test import Client
 from bs4 import BeautifulSoup
 from .models import Post
+from django.contrib.auth.models import User
 
 class TestView(TestCase):
 
     def setUp(self):
         self.client=Client()
+        self.user_trump=User.objects.create_user(username='trump',password='somepassword')
+        self.user_obama=User.objects.create_user(username='obama',password="somepassword")
 
     def navar_test(self,soup):
         navbar = soup.nav
@@ -60,9 +63,16 @@ class TestView(TestCase):
         post_001=Post.objects.create(
             title="첫 번째 포스트 입니다.",
             content="Hello World. We are the world",
+            author=self.user_trump
         )
+        # post_002 = Post.objects.create(
+        #     title="두 번째 포스트 입니다.",
+        #     content="술 멈춰!",
+        #     author=self.user_obama
+        # )
 
-        self.assertEqual(post_001.get_absolute_url(), '/blog/1/') #'/blog/1'
+        self.assertEqual(Post.objects.count(),1)
+        # self.assertEqual(post_001.get_absolute_url(), '/blog/1/') #'/blog/1'
 
         response=self.client.get(post_001.get_absolute_url())#접속을 할 때는 /하나를 더 추가 해주어야 함 #'/blog/1/'   post_001.get_absolute_url()
         self.assertEqual(response.status_code, 200)
@@ -80,7 +90,12 @@ class TestView(TestCase):
         post_area=main_area.find('div', id="post-area")
         self.assertIn(post_001.title,post_area.text)
 
+        self.assertIn(self.user_trump.username.upper(),post_area.text)
+
+
         self.assertIn(post_001.content , post_area.text)
+
+
 
 
 
