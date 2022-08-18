@@ -2,6 +2,7 @@
     {% block head_title %}
     {{post.title}} | Blog
     {% endblock%}
+
 {% block main_area %}
         <div class="col-lg-8" id="post-area">
             <!-- Post content-->
@@ -17,13 +18,21 @@
                     <!-- Post title-->
                     <h1 class="fw-bolder mb-1">{{post.title}}</h1>
                     <h5 class="text-muted">{{post.hook_text}}</h5>
-                    <!-- Post meta content-->
-                    <div class="text-muted fst-italic mb-2">{{post.created_at}}
                     <p class ="lead">by
                     <a href="#">{{post.author | upper}}</a> </p></div>
+                    <hr/>
+
+
+                    <!-- Post meta content-->
+                    <div class="text-muted fst-italic mb-2">{{post.created_at}}
+                    {% if user.is_authenticated and user == post.author %}
+                        <a class="btn btn-info btn-sm" style="float:right" href="/blog/update_post/{{post.pk}}/" role="button"><i class="fas fa-pen"></i>Edit Post </a>
+                    {% endif %}
+
+                    <hr/>
                     <!-- Post categories-->
-                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
-                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
+<!--                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>-->
+<!--                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>-->
                 </header>
                 <!-- Preview image figure-->
 
@@ -34,8 +43,9 @@
                 <img class="img-fluid rounded" src="https://picsum.photos/seed/{{post.id}}/800/200" alt="random_image">
                 {% endif %}
                 <!-- Post content-->
+                        <p></p>
                 <section class="mb-5">
-                    <p>
+                    <p style="color : black">
                         {{post.content}}
                     </p>
                     {% if post.tags.exists %}
