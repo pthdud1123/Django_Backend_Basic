@@ -14,8 +14,8 @@
 <body>
 <!--#blog.html을 저장할거에요-->
 {% include 'blog/navbar.html'%}
-<div class="container my-3" id="main-area">
-    <div class="row">
+<div class="container " id="main-area">
+    <div class="row my-3">
         <div class="col-md-8 col-lg-9">
             {%block main_area%}
             {%endblock%}
@@ -37,7 +37,7 @@
                 <div class="card-header">Categories</div>
                 <div class="card-body">
                     <div class="row">
-                        <ul class="list-unstyled mb-0">
+                        <ul>
                             {% for c in categories %}
                             <li>
                                 <a href="{{c.get_absolute_url}}">{{c}} ({{ c.post_set.count }})</a>
