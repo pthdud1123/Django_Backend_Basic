@@ -1,3 +1,6 @@
+import logging
+import pprint
+
 from .models import Post, Category, Tag
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.shortcuts import render, redirect
@@ -76,7 +79,8 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
             context['tags_str_default'] = ';'.join(tags_str_list)
         return context
 
-    def from_valid(self, form):
+    def form_valid(self, form):
+        logging.error("from valid 메서드를 호출했냐?")
         current_user = self.request.user
         if current_user.is_authenticated and (current_user.is_staff or current_user.is_superuser):
             form.instance.author = current_user
